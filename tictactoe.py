@@ -24,7 +24,6 @@ def init_model():
     init_default_graph()
     # Initialize the variables (i.e. assign their default value)
     init_variables()
-    global weights, biases, pred, cost, optimizer, train_boards
     # Initialize inputs, outputs and predicted outputs
     init_graph_inputs_and_outputs()
     # Initialize graphs weights and biases

@@ -4,7 +4,9 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
 )
 from flask_cors import CORS
-from .tictactoe import predict, accuracy, train
+from .tictactoe import predict, train
+from .tictactoe_v2 import accuracy
+from .UnbeatablePlayer import get_next_move
 
 bp = Blueprint('tictactoe', __name__, url_prefix='/tictactoe')
 CORS(bp)
@@ -66,5 +68,15 @@ def train_NN():
         train()
         acc = accuracy()
         return jsonify({'accuracy': acc})
+    except Exception as e:
+        return jsonify({'error': str(e)})    
+
+@bp.route('/api/v1.0/unbeat', methods=['POST'])
+def get_unbeat_move():
+    board = request.form.get('board')
+    mark = request.form.get('mark')
+    try:
+        move = get_next_move(board, mark)
+        return jsonify({'move': move})
     except Exception as e:
         return jsonify({'error': str(e)})    

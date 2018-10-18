@@ -2,7 +2,8 @@ import os
 
 from flask import Flask, jsonify
 from . import db, auth, blog, tictactoeAPI
-from .tictactoe import init_model
+# from .tictactoe import init_model
+from .model_v2 import init_model
 
 def create_app(test_config=None):
     # create and configure the app

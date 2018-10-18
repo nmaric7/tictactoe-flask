@@ -43,8 +43,6 @@ def calculate_accuracy(inputs, labels):
     correct_pred = tf.equal(tf.argmax(m.pred, 1), tf.argmax(m.Y, 1))
     # define accouracy metric
     accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
-
-    print("calculate_accuracy")
     # print
     acc = accuracy.eval({m.X: inputs, m.Y: labels})
 

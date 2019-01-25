@@ -20,7 +20,7 @@ def mask_board_by_mark(board, mark):
     mask = []
     board = board.rstrip('\n')
     for letter in board:
-        mask.append(1 if letter == mask else 0)
+        mask.append(1 if letter == mark else 0)
     return mask
 
 def mask_output(output):
@@ -30,3 +30,13 @@ def mask_output(output):
     for i in range(9):
         outputArray.append(1 if i == outputValue else 0)    
     return outputArray    
+
+def append_training_data(data_path, data_name, board, move):
+    u.change_working_directory(data_path)
+    with open(data_name, "a") as myfile:
+        myfile.write(board + "," + move + "\n")
+
+def prepare_sample_board(board):
+    sample_boards = []
+    sample_boards.append(mask_board_by_mark(board, 'X') + mask_board_by_mark(board, 'O'))
+    return sample_boards

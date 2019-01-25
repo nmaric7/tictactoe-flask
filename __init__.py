@@ -1,9 +1,12 @@
 import os
 
-from flask import Flask, jsonify
-from . import db, auth, blog, tictactoeAPI
+from flask import Flask, jsonify, url_for
+from . import db, auth, blog
+from .v1 import tictactoeAPI as tictactoeAPI_v1
+from .v2 import tictactoeAPI as tictactoeAPI_v2
+
 # from .tictactoe import init_model
-from .model_v2 import init_model
+# from .model_v2 import init_model
 
 def create_app(test_config=None):
     # create and configure the app
@@ -34,17 +37,32 @@ def create_app(test_config=None):
     # init app with database
     db.init_app(app)
     # register blueprints
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
-    app.register_blueprint(tictactoeAPI.bp)
+    # app.register_blueprint(auth.bp)
+    # app.register_blueprint(blog.bp)
+
+    app.register_blueprint(tictactoeAPI_v1.bp)
+    app.register_blueprint(tictactoeAPI_v2.bp)
 
     app.add_url_rule('/', endpoint='index')
 
-    @app.before_first_request
-    def init_tf():
-        print("Run this function before first request")
-        init_model()
+    @app.route('/site-map')
+    def site_map():
+        import urllib.parse
+        output = []
+        for rule in app.url_map.iter_rules():
 
-    # cors = CORS(app, resources={r"/tictactoe/api/*": {"origins": "localhost:9100"}})
+            options = {}
+            for arg in rule.arguments:
+                options[arg] = "[{0}]".format(arg)
 
+            methods = ','.join(rule.methods)
+            # url = url_for(rule.endpoint, **options)
+            line = urllib.parse.unquote("{:30s} {:25s} {}".format(rule.endpoint, methods, rule))
+            output.append(line)
+        
+        for line in sorted(output):
+            print(line)
+        
+        return jsonify({'output': sorted(output)})
+      
     return app

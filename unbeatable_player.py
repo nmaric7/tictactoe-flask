@@ -17,7 +17,6 @@ WINNING_COMBINATIONS = [
 ]
 
 def get_next_move(board, mark):
-    print("get_next_move", board, mark)
     # check for winning move
     move = winning_move(board, mark)
     if move != -1:
@@ -50,7 +49,6 @@ def get_next_move(board, mark):
     return move
 
 def winning_move(board, mark):
-    print("winning_move", board, mark)
     for idx, s in enumerate(board):
         if s == EMPTY_SQUARE:
             c_board = copy_board(board)
@@ -60,7 +58,6 @@ def winning_move(board, mark):
     return -1
 
 def block_opponent_win(board, mark):
-    print("block_opponent_move", board, mark)
     opponent_mark = get_opponent_mark(mark)
     for idx, s in enumerate(board):
         if s == EMPTY_SQUARE:
@@ -71,7 +68,6 @@ def block_opponent_win(board, mark):
     return -1
 
 def fork_move(board, mark):
-    print("fork_move", board, mark)
     for idx, s in enumerate(board):
         if s == EMPTY_SQUARE:
             c_board = copy_board(board)
@@ -81,7 +77,6 @@ def fork_move(board, mark):
     return -1
 
 def block_opponent_fork(board, mark):
-    print("block_opponent_fork", board, mark)
     opponent_mark = get_opponent_mark(mark)
     for idx, s in enumerate(board):
         if s == EMPTY_SQUARE:
@@ -92,7 +87,6 @@ def block_opponent_fork(board, mark):
     return -1
 
 def opposite_corner(board, mark):
-    print("opposite_corner", board, mark)
     opponent_mark = get_opponent_mark(mark)
     if board[0] == EMPTY_SQUARE and board[8] == opponent_mark: 
         return 0
@@ -106,7 +100,6 @@ def opposite_corner(board, mark):
     return -1
 
 def available_corner(board):
-    print("available_corner", board)
     if board[0] == EMPTY_SQUARE:
         return 0
     elif board[2] == EMPTY_SQUARE:
@@ -118,7 +111,6 @@ def available_corner(board):
     return -1    
 
 def available_side(board):
-    print("available_side", board)
     if board[1] == EMPTY_SQUARE:
         return 1
     elif board[3] == EMPTY_SQUARE:

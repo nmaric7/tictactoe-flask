@@ -26,7 +26,7 @@ There is two available version of NN in this app
 <h5>/tictactoe/api/v1.0/accuracy</h5>
 <p>Method return accuracy of neural network</p>
 
-<h5></tictactoe/api/v1.0/move</h5>
+<h5>/tictactoe/api/v1.0/move</h5>
 <p>Method returns next move for X player</p>
   
 <h5>/tictactoe/api/v1.0/train</h5>

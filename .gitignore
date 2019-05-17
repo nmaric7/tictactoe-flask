@@ -3,7 +3,8 @@ __pycache__/
 
 model/*
 data/*
-
+.history/*
+.git/*
 
 v1/model/*
 

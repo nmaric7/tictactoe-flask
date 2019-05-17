@@ -13,7 +13,7 @@ CORS(bp)
 
 @bp.before_app_first_request
 def init_tf():
-    print("Run this function before first request")
+    # print("Run this function before first request")
     m.init_model()
     if model_helper.checkpoint_exists(m.get_dictionary()) == False:
         model_helper.create_and_save_default_model(m.get_dictionary())

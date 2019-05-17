@@ -1,4 +1,5 @@
 from . import utils as u
+import os
 
 def load_inputs_and_labels(data_path, data_name):
     nnInputs = []
@@ -31,10 +32,13 @@ def mask_output(output):
         outputArray.append(1 if i == outputValue else 0)    
     return outputArray    
 
-def append_training_data(data_path, data_name, board, move):
+def append_training_data(data_path, data_name, new_boards):
+    print('append_training_data', data_path, data_name, new_boards)
     u.change_working_directory(data_path)
-    with open(data_name, "a") as myfile:
-        myfile.write(board + "," + move + "\n")
+
+    with open(data_name, "a+") as myfile:
+        for b in new_boards:
+            myfile.write(b + "\n")
 
 def prepare_sample_board(board):
     sample_boards = []

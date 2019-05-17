@@ -5,8 +5,5 @@ import random
 EMPTY_MARK = '-'
 
 def get_next_move(board):
-    free_squares = []
-    for idx, square in enumerate(board):
-        if EMPTY_MARK == square:
-            free_squares.append(idx)
+    free_squares = [idx for idx, square in enumerate(board) if square == EMPTY_MARK]
     return random.choice(free_squares)

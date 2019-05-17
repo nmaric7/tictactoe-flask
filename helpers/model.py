@@ -35,7 +35,7 @@ def create_and_save_default_model(d):
         save_model(sess, d)    
 
 def train_model(sess, d):
-    print("train_model")
+    # print("train_model")
     # load training inputs and labels
     inputs, labels = b.load_inputs_and_labels(d['data_path'], d['data_name'])
     # Training cycle
@@ -97,15 +97,15 @@ def train_NN(d):
 
 def predict(board, d):
     with tf.Session(graph=d['graph']) as sess:
-        print('init')
+        # print('init')
         sess.run(d['init'])
-        print('load_model')
+        # print('load_model')
         load_model(sess, d)
-        print('sample_boards')
+        # print('sample_boards')
         sample_boards = b.prepare_sample_board(board)
-        print('predicted')
+        # print('predicted')
         predicted = sess.run(d['pred'], feed_dict={d['X']: sample_boards})[0]
-        print('find first available')
+        # print('find first available')
         move = find_first_available(board, np.argsort(-predicted))
         return int(move)
 
